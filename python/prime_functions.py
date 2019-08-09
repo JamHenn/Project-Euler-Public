@@ -1,3 +1,27 @@
+def primes_up_to(n):
+    """Generates the prime numbers up to n>=2"""
+
+    primes = [2]
+
+    # check all odd numbers from 3 to n
+    for i in range(3, n+1, 2):
+        # Only need to check primes up to sqrt(i)
+        if i != 3:
+            potential_prime_factors = [x for x in primes if x**2 <= i]
+        # There are no primes below sqrt(3)
+        else:
+            potential_prime_factors = [2]
+
+        for p in potential_prime_factors:
+            if i % p == 0: # i composite
+                break
+        # If all primes have been checked, then i is prime.
+        else:
+            primes.append(i)
+
+    return primes
+
+
 def largest_prime_factor(n):
     """ Finds the largest prime factor of the integer n """
 
@@ -35,5 +59,3 @@ def largest_prime_factor(n):
     # ascending order, n is now the largest prime factor.
 
     return n
-
-print(largest_prime_factor(600851475143))
