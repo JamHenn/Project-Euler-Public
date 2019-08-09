@@ -59,3 +59,45 @@ def largest_prime_factor(n):
     # ascending order, n is now the largest prime factor.
 
     return n
+
+
+def largest_prime_factor(n):
+    """ Finds the largest prime factor of the integer n """
+
+    for p in primes:
+        # if p is a prime factor, divide it out
+        while n % p == 0:
+            n //= p
+        if n in primes:
+            break
+        elif n == 1:
+            n = p # p was the largest factor
+    # The for loop breaks when n becomes prime.
+    # Since the prime factors were divided out in
+    # ascending order, n is now the largest prime factor.
+    return n
+
+
+def isprime(n):
+    """ Tests if the integer n is prime """
+
+    if n == 1:
+        return False
+    elif n < 4: # n = 2,3
+        return True
+    elif ((n % 2 == 0) or (n % 3 == 0)) : # 2 or 3 divides n
+        return False
+    elif n < 9: # n = 5,7
+        return True
+    else: # n = 6k +- 1 for k>=2.
+        i = 5 # test if i divides n. 2 and 3 do not.
+        sqrt = int(math.sqrt(n)) # floor of square root
+
+        # Only primes below sqrt(n) need to be checked
+        while i < sqrt+1:
+            if n % i == 0:
+                return False
+            elif n % (i+2) == 0:
+                return False
+            i += 6
+    return True
