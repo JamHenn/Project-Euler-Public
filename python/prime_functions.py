@@ -1,3 +1,5 @@
+import math # sqrt function
+
 def primes_up_to(n):
     """Generates the prime numbers up to n>=2"""
 
