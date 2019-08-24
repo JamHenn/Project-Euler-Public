@@ -103,3 +103,69 @@ def isprime(n):
                 return False
             i += 6
     return True
+
+
+def prime_factorisation(n):
+    """ Returns the prime factorisation of n in a dictionary """
+
+    factors = {}
+
+    p = 2 # p is the smallest potential prime factor of n
+    while n % p == 0:
+        # if p is not in the dictionary, add it with value 1
+        # if p is in the dictionary, add 1 to its value
+        factors[p] = factors.get(p, 0) + 1
+        n //= p
+
+    p = 3
+    while n % p == 0:
+        factors[p] = factors.get(p, 0) + 1
+        n //= p
+
+    p, i = 5, 0 # i=0,1 will be used to skip every 3rd odd number (not prime)
+    while p**2 <= n: # if p^2 > n, then n has no more factors
+        # p is the smallest potential factor, so if it is a factor,
+        # it must be prime
+        while n % p == 0:
+            factors[p] = factors.get(p, 0) + 1
+            n //= p
+
+        p += 2 * (1 + i)
+        i += 1
+        i %= 2
+
+    # the while loop breaks when n has no more factors smaller than itself
+    # so n is either 1 or a prime number
+
+    if n != 1:
+        factors[n] = 1
+
+    return factors
+
+
+def sieve(limit):
+    """
+    Gives a sieve of composite odd numbers from 3 to limit
+
+    (Input) limit: find composites/primes up to this number
+
+    (Output) sieve: sieve[i] = True iff (2*i + 3) is composite
+    """
+
+    # number of odd numbers from 3 to limit
+    sievebound = (limit - 1) // 2
+
+    # 2i+3 is composite for i = 0,...,sievebound
+    sieve = [False for i in range(sievebound)]
+
+    # indices of potential composite numbers
+    crosslimit = math.floor(math.sqrt(limit) - 1) // 2
+
+    for i in range(crosslimit):
+        if not sieve[i]: # ith odd number after 1 is prime
+            # p = 2i + 3
+            # p^2 = 4i^2 + 12i + 9 = 2(2i^2 + 6i + 3) + 3
+            # p^2 is the (2i^2 + 6i + 3) odd number after 1
+            for j in range(2*i**2 + 6*i + 3, sievebound, 2*i + 3):
+            # j = p^2 to limit, step size p
+                sieve[j] = True # composite because p divides 2j+3
