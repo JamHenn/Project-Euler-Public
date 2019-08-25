@@ -83,7 +83,7 @@ def largest_prime_factor(n):
 def isprime(n):
     """ Tests if the integer n is prime """
 
-    if n == 1:
+    if n < 2:
         return False
     elif n < 4: # n = 2,3
         return True
@@ -169,3 +169,5 @@ def sieve(limit):
             for j in range(2*i**2 + 6*i + 3, sievebound, 2*i + 3):
             # j = p^2 to limit, step size p
                 sieve[j] = True # composite because p divides 2j+3
+
+    return sieve
