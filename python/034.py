@@ -22,9 +22,7 @@ while ((n+1)*nine > 10**n):
 # numbers with the digit factorial property
 # can have at most n=7 digits
 list = []
-# not including one digit numbers
-# up to the highest 7 digit number
-for i in range(10, 10**n-1):
+for i in range(10, 10**n): # 2 to n digits
     digits = str(i)
     digitfac = 0
     for digit in digits:
