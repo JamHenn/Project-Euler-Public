@@ -27,6 +27,9 @@ def primes_up_to(n):
 def largest_prime_factor(n):
     """ Finds the largest prime factor of the integer n """
 
+    if n < 2:
+        raise Exception("Input must be an integer greater than 1")
+
     p = 2 # initial prime number
     primes = [p] # list of primes
 
@@ -34,15 +37,17 @@ def largest_prime_factor(n):
         # if p is a prime factor
         if n % p == 0:
             # divide the factor p out of n
-            n //= p
             while n % p == 0:
                 n //= p
+            # if p was the last prime factor
+            if n == 1:
+                # prime factors were divided out in ascending order
+                return p
 
         # if p is not a prime factor, find the next prime number
         elif p == 2:
             p += 1
             primes.append(p)
-
         else:
             while True:
                 p += 2 # next odd number
@@ -59,12 +64,11 @@ def largest_prime_factor(n):
     # The while loop breaks when n becomes prime.
     # Since the prime factors were divided out in
     # ascending order, n is now the largest prime factor.
-
     return n
 
-
-def largest_prime_factor(n):
-    """ Finds the largest prime factor of the integer n """
+"""
+def largest_prime_factor2(n):
+    # Finds the largest prime factor of the integer n
 
     for p in primes:
         # if p is a prime factor, divide it out
@@ -78,7 +82,7 @@ def largest_prime_factor(n):
     # Since the prime factors were divided out in
     # ascending order, n is now the largest prime factor.
     return n
-
+"""
 
 def isprime(n):
     """ Tests if the integer n is prime """
@@ -142,6 +146,19 @@ def prime_factorisation(n):
 
     return factors
 
+
+def prime_factorisation_string(n):
+    factorisation_dict = prime_factorisation(n)
+    factorisation_pairs = list(factorisation_dict.items())
+
+    result = ""
+    for factor, power in factorisation_pairs:
+        result += f"{factor}"
+        if power > 1:
+            result += f"^{power}"
+        result += " x "
+
+    return result[:-3] # trim the final " x "
 
 def sieve(limit):
     """
