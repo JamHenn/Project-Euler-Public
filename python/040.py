@@ -102,11 +102,11 @@ And the '1' in '12' is at the 14th index
 Now, working backwards,
 how do we find the nth term of the sequence?
 
-1. Find the largest d such that First(d) < n.
-     This means that n is a d-digit number.
-2. Compute k := (n-First(d))//d.
+1. Find the largest d such that First(d) <= n.
+     This means that n is part of a d-digit number.
+2. Compute k := (n-First(d))//d + 1.
      How far is n from First(d) in multiples of d?
-     Call this number 'k'.
+     Call this number k-1.
      This means that the nth term is part of the
      kth d-digit number.
 3. Compute Value(k, d).
@@ -118,3 +118,67 @@ how do we find the nth term of the sequence?
 6. Find the nth term using the value of the number,
    and the index within that number.
 """
+
+def first(d):
+    """
+    Returns the index of the first d-digit number in the sequence
+
+    Formula:
+    (d-1)*10^(d-1) - (10^(d-1)-1)/9 + 1
+
+    Could compute first and second terms with strings
+    for enhanced performance
+    """
+    return (d-1)*10**(d-1) - (10**(d-1)-1)//9 + 1
+
+
+def value(n, d):
+    """Returns the nth d-digit number"""
+    return 10**(d-1) + (n-1)
+
+
+def index(n, d):
+    """
+    Returns the starting index of the
+    nth d-digit number in the sequence
+    """
+    return  first(d) + (n-1)*d
+
+
+def digits_in_num_at_index(n):
+    """
+    Returns the number of digits in the number that
+    the nth term is a part of.
+
+    i.e. Finds the largest d such that first(d) < n
+    """
+    d = 1
+    while first(d) <= n:
+        d += 1
+
+    # Loop breaks when first(d) > n
+    return d - 1
+
+
+def nth_term_in_sequence(n):
+    """Returns the nth term in the sequence"""
+
+    d = digits_in_num_at_index(n)
+
+    # n is the kth d-digit number
+    k = (n - first(d))//d + 1
+
+    # number that nth term is part of
+    number = str(value(k, d))
+
+    # starting index of number
+    starting_index = index(k, d)
+
+    return int(number[n - starting_index])
+
+
+product = 1
+for n in [10**i for i in range(7)]:
+    product *= nth_term_in_sequence(n)
+
+print(product)
