@@ -158,7 +158,9 @@ def prime_factorisation_string(n):
             result += f"^{power}"
         result += " x "
 
-    return result[:-3] # trim the final " x "
+    # trim the final " x "
+    return result[:-3]
+
 
 def sieve(limit):
     """
