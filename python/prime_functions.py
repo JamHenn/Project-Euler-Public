@@ -190,3 +190,13 @@ def sieve(limit):
                 sieve[j] = True # composite because p divides 2j+3
 
     return sieve
+
+
+def prime_sieve_up_to(limit):
+    primes = [2]
+    composite_sieve = sieve(limit)
+    for i, is_composite in enumerate(composite_sieve):
+        if not is_composite:
+            primes.append(2*i + 3)
+
+    return primes
