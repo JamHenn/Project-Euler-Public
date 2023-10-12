@@ -81,7 +81,7 @@ def xor_decrypt(encrypted_text, encryption_key):
 
 
 encryption = ""
-with open("data/p059_cipher.txt", 'r') as f:
+with open("../data/p059_cipher.txt", 'r') as f:
     decimals = f.read().split(',')
     characters = [convert_ascii_to_char(int(decimal)) for decimal in decimals]
     encryption = "".join(characters)

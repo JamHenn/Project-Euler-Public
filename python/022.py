@@ -1,4 +1,4 @@
-with open("data/022.txt", 'r') as f:
+with open("../data/022.txt", 'r') as f:
     names = sorted([name.strip('"') for name in f.read().split(',')])
 
 total = 0

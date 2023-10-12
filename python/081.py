@@ -74,7 +74,7 @@ for row in example_matrix:
     print(row)
 print(f"\nThe minimal path sum is {reduce_square_matrix(example_matrix)}.")
 
-with open('data/p081_matrix.txt', 'r') as f:
+with open('../data/p081_matrix.txt', 'r') as f:
     matrix = [[int(num) for num in line.split(',')] for line in f]
 
 print("\nFor the challenge matrix:")
