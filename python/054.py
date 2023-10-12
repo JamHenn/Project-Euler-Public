@@ -83,7 +83,7 @@ def classify(hand):
             return "Error", values
 
 
-with open('054.txt', 'r') as f:
+with open('data/054.txt', 'r') as f:
     #data = [[num for num in line.split()] for line in f]
     W, L, D = 0, 0, 0
     for line in f:

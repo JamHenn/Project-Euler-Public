@@ -8,7 +8,7 @@ def is_triangular(n):
     return ( math.sqrt( 8*n+1 )%1 == 0.0 )
 
 count = 0
-with open("042.txt", 'r') as f:
+with open("data/042.txt", 'r') as f:
     for word in f.read().split(","):
         word = word.strip('"')
         word_value = sum((ord(letter) - 64) for letter in word)

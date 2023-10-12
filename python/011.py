@@ -1,4 +1,4 @@
-with open('011.txt', 'r') as f:
+with open('data/011.txt', 'r') as f:
     data = [[int(num) for num in line.split(' ')] for line in f]
 
 

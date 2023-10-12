@@ -1,4 +1,4 @@
-with open('013.txt', 'r') as f:
+with open('data/013.txt', 'r') as f:
     numbers = [int(line) for line in f]
 
 sum = sum(numbers)

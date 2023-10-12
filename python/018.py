@@ -1,4 +1,4 @@
-with open("018.txt", 'r') as f:
+with open("data/018.txt", 'r') as f:
     triangles = [[int(num) for num in line.split()] for line in f]
 
 I = len(triangles)
